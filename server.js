@@ -17,6 +17,10 @@ app.use(express.json());
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+
+app.get('/', (req, res) => {
+  res.send('Model deployment successful!');
+});
 // Route to fetch latest GitHub repositories
 app.get('/api/github', async (req, res) => {
   try {
