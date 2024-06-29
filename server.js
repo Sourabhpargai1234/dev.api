@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
-var cors = require('cors')
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: 'https://dev-api-frontend.vercel.app/',
+  origin: 'https://dev-api-frontend.vercel.app', // Adjust origin without trailing slash
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true, // Enable credentials (cookies, authorization headers)
@@ -17,7 +17,7 @@ app.use(express.json());
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-// Route to fetch latest GitHub repositories with author name, repository name, language, description, and URL
+// Route to fetch latest GitHub repositories
 app.get('/api/github', async (req, res) => {
   try {
     const response = await axios.get('https://api.github.com/search/repositories', {
@@ -31,7 +31,7 @@ app.get('/api/github', async (req, res) => {
       }
     });
 
-    // Process the data to extract necessary fields
+    // Extract necessary fields from GitHub API response
     const repos = response.data.items.map(repo => ({
       author: repo.owner.login,
       repository_name: repo.name,
@@ -66,7 +66,7 @@ app.get('/api/github/topic', async (req, res) => {
       }
     });
 
-    // Process the data to extract necessary fields
+    // Extract necessary fields from GitHub API response
     const repos = response.data.items.map(repo => ({
       author: repo.owner.login,
       repository_name: repo.name,
