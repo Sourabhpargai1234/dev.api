@@ -41,7 +41,8 @@ app.get('/api/github', async (req, res) => {
       repository_name: repo.name,
       language: repo.language,
       description: repo.description,
-      url: repo.html_url
+      url: repo.html_url,
+      avatar_url: repo.owner.avatar_url
     }));
 
     res.json(repos);
@@ -76,7 +77,8 @@ app.get('/api/github/topic', async (req, res) => {
       repository_name: repo.name,
       language: repo.language,
       description: repo.description,
-      url: repo.html_url
+      url: repo.html_url,
+      avatar_url: repo.owner.avatar_url
     }));
 
     res.json(repos);
